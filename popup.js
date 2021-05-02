@@ -1,20 +1,21 @@
 document.addEventListener(
-  "click",
+  'click',
   function (event) {
-    if (event.target.tagName.toLowerCase != "a") {
-      const dummyTag = document.createElement("p");
-      const uid = "one-clip_" + String(Date.now());
+    if (event.target.tagName.toLowerCase != 'a') {
+      const dummyTag = document.createElement('p');
+      const uid = 'one-clip_' + String(Date.now());
       dummyTag.id = uid;
       dummyTag.innerText = event.target.innerText;
       document.body.appendChild(dummyTag);
 
-      const element = document.querySelector("#" + uid),
+      const element = document.querySelector('#' + uid),
         selection = window.getSelection(),
         range = document.createRange();
       range.selectNodeContents(element);
       selection.removeAllRanges();
       selection.addRange(range);
-      const succeeded = document.execCommand("copy");
+
+      const succeeded = document.execCommand('copy');
       // if (succeeded) {
       //   alert("コピーが成功しました！");
       // } else {
