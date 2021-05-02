@@ -14,10 +14,13 @@ document.addEventListener(
       range.selectNodeContents(element);
       selection.removeAllRanges();
       selection.addRange(range);
-
       const succeeded = document.execCommand('copy');
+      const tmpStyle = event.target.style;
       if (succeeded) {
-        alert('コピーが成功しました！');
+        event.target.style.backgroundColor = 'rgb(130, 255, 130)';
+        setTimeout(async function () {
+          await (event.target.style = tmpStyle);
+        }, 500);
       } else {
         alert('コピーが失敗しました!');
       }
