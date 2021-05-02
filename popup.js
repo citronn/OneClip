@@ -1,5 +1,5 @@
 document.addEventListener(
-  'click',
+  'mousedown',
   function (event) {
     if (event.target.tagName.toLowerCase != 'a') {
       const dummyTag = document.createElement('p');
