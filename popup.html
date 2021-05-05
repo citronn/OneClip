@@ -3,8 +3,25 @@
   <head>
     <title>One Cliip</title>
   </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      width: 400px;
+      height: 600px;
+    }
+  </style>
   <body>
-    <h1 style="margin: 3px">One Clip</h1>
+    <h1 style="text-align: center">One Clip</h1>
+    <button id="default-settings">use default settings</button>
+    <form>
+      <h2>exclusive URIs</h2>
+      <div id="exclusiveURIsBox"></div>
+      <h2>exclusive tags</h2>
+      <div id="exclusiveTagsBox"></div>
+    </form>
   </body>
   <script src="src/popup.js"></script>
 </html>

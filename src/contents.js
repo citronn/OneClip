@@ -1,21 +1,16 @@
-const currentHostName = document.location.hostname;
-let exclusizeURIs = [
-  // this is example
-  'https://www.google.com/',
-];
-let exclusizeHostNames = exclusizeURIs.map((url) => new URL(url).hostname);
+console.log('came content.js');
+let exclusiveURIs = [];
+let exclusiveTags = []; //TODO validation: all elements must be lowercase
 
-//TODO validation: all elements must be lowercase
-let exclusiveTags = [
-  // this is example
-  'a',
-  'button',
-  'input',
-  'textarea',
-  'img',
-  'svg',
-  'path',
-];
+chrome.storage.local.get(function (exclusiveEntity) {
+  console.log('came get storage in contentsjs', exclusiveEntity);
+  !!exclusiveEntity.URIs && (exclusiveURIs = exclusiveEntity.URIs);
+  !!exclusiveEntity.tags && (exclusiveTags = exclusiveEntity.tags);
+});
+
+const currentHostName = document.location.hostname;
+
+let exclusizeHostNames = exclusiveURIs.map((url) => new URL(url).hostname);
 
 !exclusizeHostNames.includes(currentHostName) &&
   document.addEventListener(
