@@ -10,4 +10,5 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {},
+  globals: { chrome: true },
 };
