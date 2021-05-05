@@ -21,7 +21,10 @@ let exclusiveTags = [
   document.addEventListener(
     'mousedown',
     function (event) {
-      if (!exclusiveTags.includes(event.target.tagName.toLowerCase())) {
+      if (
+        !exclusiveTags.includes(event.target.tagName.toLowerCase()) &&
+        event.target.innerText // TODO To be considered: looks complicated and may be unnecessary
+      ) {
         const dummyTag = document.createElement('p');
         const uid = 'one-clip_' + String(Date.now());
         dummyTag.id = uid;
