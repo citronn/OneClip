@@ -5,11 +5,23 @@ let exclusizeURIs = [
 ];
 let exclusizeHostNames = exclusizeURIs.map((url) => new URL(url).hostname);
 
+//TODO validation: all elements must be lowercase
+let exclusiveTags = [
+  // this is example
+  'a',
+  'button',
+  'input',
+  'textarea',
+  'img',
+  'svg',
+  'path',
+];
+
 !exclusizeHostNames.includes(currentHostName) &&
   document.addEventListener(
     'mousedown',
     function (event) {
-      if (event.target.tagName.toLowerCase != 'a') {
+      if (!exclusiveTags.includes(event.target.tagName.toLowerCase())) {
         const dummyTag = document.createElement('p');
         const uid = 'one-clip_' + String(Date.now());
         dummyTag.id = uid;
