@@ -31,6 +31,23 @@ chrome.storage.local.get(function (exclusiveEntity) {
   document
     .getElementById('exclusiveTagsBox')
     .appendChild(exclusiveTagsTableElement);
+
+  document.querySelectorAll('.btn').forEach((btnElement) => {
+    console.log(btnElement);
+    btnElement.addEventListener('click', function (event) {
+      console.log(event.target);
+      if (event.target.innerText === 'Remove') {
+        const removedElement = event.target.id;
+        exclusiveURIs = exclusiveURIs.filter((url) => url != removedElement);
+        exclusiveTags = exclusiveTags.filter((tag) => tag != removedElement);
+      }
+      if (event.target.innerText === 'Add') {
+        // implemention add element
+      }
+      let exclusiveDict = { URIs: exclusiveURIs, tags: exclusiveTags };
+      chrome.storage.local.set(exclusiveDict, () => location.reload()); // TODO want to rewrite using async await
+    });
+  });
 });
 
 chrome.storage.onChanged.addListener(() => {
@@ -53,6 +70,7 @@ function generateExclusiveTable(array) {
   const tableTag = document.createElement('table');
 
   array.map((element) => {
+    //TODO it is better use foreach
     const trTag = document.createElement('tr');
 
     // create <td> and append to <tr>
@@ -62,12 +80,30 @@ function generateExclusiveTable(array) {
 
     // create <button> and append to <tr>
     const buttonTag = document.createElement('button');
+    buttonTag.type = 'button'; // need to prevent default type 'submit' which runs page reload
     buttonTag.id = element; //TODO array must not have duplication
+    buttonTag.className = 'btn';
     buttonTag.innerText = 'Remove';
     trTag.appendChild(buttonTag);
 
     tableTag.appendChild(trTag);
   });
+  const trTag = document.createElement('tr');
+
+  // create <td> and append to <tr>
+  const tdTag = document.createElement('td');
+  const inputTag = document.createElement('input');
+  tdTag.appendChild(inputTag);
+  trTag.appendChild(tdTag);
+
+  // create <button> and append to <tr>
+  const buttonTag = document.createElement('button');
+  buttonTag.type = 'button'; // need to prevent default type 'submit' which runs page reload
+  buttonTag.className = 'btn';
+  buttonTag.innerText = 'Add';
+  trTag.appendChild(buttonTag);
+
+  tableTag.appendChild(trTag);
 
   return tableTag;
 }
