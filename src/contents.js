@@ -26,10 +26,10 @@ let exclusizeHostNames = exclusiveURIs.map((url) => new URL(url).hostname);
         dummyTag.innerText = event.target.innerText;
         document.body.appendChild(dummyTag);
 
-        const element = document.querySelector('#' + uid),
+        const dummyTagSelector = document.querySelector('#' + uid),
           selection = window.getSelection(),
           range = document.createRange();
-        range.selectNodeContents(element);
+        range.selectNodeContents(dummyTagSelector);
         selection.removeAllRanges();
         selection.addRange(range);
         const succeeded = document.execCommand('copy');
