@@ -33,7 +33,6 @@ chrome.storage.local.get(function (exclusiveEntity) {
     .appendChild(exclusiveTagsTableElement);
 
   document.querySelectorAll('.btn').forEach((btnElement) => {
-    console.log(btnElement);
     btnElement.addEventListener('click', function (event) {
       console.log(event.target);
       if (event.target.innerText === 'Remove') {
@@ -42,18 +41,22 @@ chrome.storage.local.get(function (exclusiveEntity) {
         exclusiveTags = exclusiveTags.filter((tag) => tag != removedElement);
       }
       if (event.target.innerText === 'Add') {
-        // implemention add element
+        Array.from(document.getElementsByTagName('input')).forEach(
+          (element) => {
+            if (element.value != '') {
+              let isAddedURIs = !!element.closest('#exclusiveURIsBox');
+              if (isAddedURIs) {
+                exclusiveURIs.push(element.value);
+              } else exclusiveTags.push(element.value);
+            }
+          }
+        );
       }
       let exclusiveDict = { URIs: exclusiveURIs, tags: exclusiveTags };
+      console.log(exclusiveDict);
       chrome.storage.local.set(exclusiveDict, () => location.reload()); // TODO want to rewrite using async await
     });
   });
-});
-
-chrome.storage.onChanged.addListener(() => {
-  //TODO use async
-  // notifiy need to reload page to load new settings
-  // insert dom which have text 'please reload' and style 'red' in popup.html
 });
 
 document
@@ -61,9 +64,7 @@ document
   .addEventListener('mousedown', function (event) {
     event.preventDefault();
 
-    chrome.storage.local.set(defaultExclusiveDict, () =>
-      console.log('set default')
-    );
+    chrome.storage.local.set(defaultExclusiveDict, () => location.reload()); // TODO use async
   });
 
 function generateExclusiveTable(array) {
@@ -93,6 +94,7 @@ function generateExclusiveTable(array) {
   // create <td> and append to <tr>
   const tdTag = document.createElement('td');
   const inputTag = document.createElement('input');
+  // inputTag.type = 'text';
   tdTag.appendChild(inputTag);
   trTag.appendChild(tdTag);
 
