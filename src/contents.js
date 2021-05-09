@@ -1,9 +1,9 @@
-console.log('came content.js');
+// console.log('came content.js');
 let exclusiveURIs = [];
 let exclusiveTags = []; //TODO validation: all elements must be lowercase
 
 chrome.storage.local.get(function (exclusiveEntity) {
-  console.log('came get storage in contentsjs', exclusiveEntity);
+  // console.log('came get storage in contentsjs', exclusiveEntity);
   !!exclusiveEntity.URIs && (exclusiveURIs = exclusiveEntity.URIs);
   !!exclusiveEntity.tags && (exclusiveTags = exclusiveEntity.tags);
   let exclusiveHostNames = exclusiveURIs.map((url) => new URL(url).hostname);
