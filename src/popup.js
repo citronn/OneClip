@@ -27,10 +27,16 @@ chrome.storage.local.get(function (exclusiveEntity) {
     .getElementById('exclusiveURIsBox')
     .appendChild(exclusiveURIsTableElement);
 
+  const inputElementForURI = document.getElementsByTagName('input')[0];
+  inputElementForURI.placeholder = 'https://example.com/';
+
   const exclusiveTagsTableElement = generateExclusiveTable(exclusiveTags);
   document
     .getElementById('exclusiveTagsBox')
     .appendChild(exclusiveTagsTableElement);
+
+  const inputElementForTag = document.getElementsByTagName('input')[1];
+  inputElementForTag.placeholder = 'Please enter HTML tag';
 
   document.querySelectorAll('.btn').forEach((btnElement) => {
     btnElement.addEventListener('click', function (event) {
