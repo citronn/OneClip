@@ -1,4 +1,4 @@
-console.log('came popupjs');
+// console.log('came popupjs');
 const defaultExclusiveURIs = ['https://www.google.com/'];
 const defaultExclusiveTags = [
   'a',
@@ -19,7 +19,7 @@ const defaultExclusiveDict = {
 let exclusiveURIs = [];
 let exclusiveTags = [];
 chrome.storage.local.get(function (exclusiveEntity) {
-  console.log('came get storage in popupjs', exclusiveEntity);
+  // console.log('came get storage in popupjs', exclusiveEntity);
   !!exclusiveEntity.URIs && (exclusiveURIs = exclusiveEntity.URIs);
   !!exclusiveEntity.tags && (exclusiveTags = exclusiveEntity.tags);
   const exclusiveURIsTableElement = generateExclusiveTable(exclusiveURIs);
@@ -34,7 +34,7 @@ chrome.storage.local.get(function (exclusiveEntity) {
 
   document.querySelectorAll('.btn').forEach((btnElement) => {
     btnElement.addEventListener('click', function (event) {
-      console.log(event.target);
+      // console.log(event.target);
       if (event.target.innerText === 'Remove') {
         const removedElement = event.target.id;
         exclusiveURIs = exclusiveURIs.filter((url) => url != removedElement);
@@ -53,7 +53,7 @@ chrome.storage.local.get(function (exclusiveEntity) {
         );
       }
       let exclusiveDict = { URIs: exclusiveURIs, tags: exclusiveTags };
-      console.log(exclusiveDict);
+      // console.log(exclusiveDict);
       chrome.storage.local.set(exclusiveDict, () => location.reload()); // TODO want to rewrite using async await
     });
   });
@@ -69,6 +69,16 @@ document
 
 function generateExclusiveTable(array) {
   const tableTag = document.createElement('table');
+
+  const trTagForThead = document.createElement('tr');
+  const thDataTag = document.createElement('th');
+  thDataTag.style = 'width:218px';
+  trTagForThead.appendChild(thDataTag);
+
+  const thButtonTag = document.createElement('th');
+  trTagForThead.appendChild(thButtonTag);
+
+  tableTag.appendChild(trTagForThead);
 
   array.map((element) => {
     //TODO it is better use foreach
