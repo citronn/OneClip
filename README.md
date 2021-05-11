@@ -2,14 +2,14 @@
 
 OneClip is a chrome extension that make it possible to copy the web text with a one click.
 
-<!-- ### **Installation instructions**
+### **Installation instructions**
 
-1. Install via the <a>Chrome web store</a>
-1. To install from source, see <a>here</a>.
+1. Install via the [Chrome web store](https://chrome.google.com/webstore/detail/oneclip/debppgoigeldmpcekjiilndppbghnlgk).
+1. To install from source here.
 
-## Document
-
-<a>OneClip's wiki</a> -->
+   1. `git clone https://github.com/citronn/OneClip` & `cd OneClip`
+   1. `yarn`
+   1. upload the OneClip folder at `chrome://extension`
 
 ## License
 
